@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabaClimate", "HabaClimate\HabaClimate.csproj", "{6C856E84-E230-4752-A1CB-7350D31C6C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C856E84-E230-4752-A1CB-7350D31C6C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C856E84-E230-4752-A1CB-7350D31C6C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C856E84-E230-4752-A1CB-7350D31C6C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C856E84-E230-4752-A1CB-7350D31C6C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {217B4041-8F01-4CC7-8B53-3B4605980690}
+	EndGlobalSection
+EndGlobal

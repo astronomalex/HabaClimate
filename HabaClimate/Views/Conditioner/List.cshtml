@@ -1,0 +1,18 @@
+﻿<div>
+    <h1>Все кондиционеры</h1>
+    <h3>@Model.CurrCategory</h3>
+    <div class="row mt-5 mb-2">
+        @{
+            foreach (var conditioner in Model.AllAirConditioners)
+            {
+                <div class="col-lg-4">
+                    <img class="img-thumbnail" src="@conditioner.Img" alt="">
+                    <h2>@conditioner.Brand.Name @conditioner.Name</h2>
+                    <p>Цена: @conditioner.Price.ToString("c")</p>
+                    <p><a class="btn btn-warning" href="#">Подробнее</a></p>
+                </div>
+            }
+        }
+    </div>
+    
+</div>

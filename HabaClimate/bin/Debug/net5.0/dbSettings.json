@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "developConnection": "Server=localhost;Database=habaClimateDb;User id=develop;Password=testPass;"
+  }
+}
