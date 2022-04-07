@@ -24,7 +24,7 @@ namespace HabaClimate.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "categories",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -69,7 +69,7 @@ namespace HabaClimate.Migrations
                     table.ForeignKey(
                         name: "FK_Good_categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "categories",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -94,7 +94,7 @@ namespace HabaClimate.Migrations
                 name: "brands");
 
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "Categories");
         }
     }
 }

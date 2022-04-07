@@ -38,7 +38,14 @@ namespace HabaClimate
             services.AddTransient<IAllAirConditioners, AirConditionerRepository>();
             services.AddTransient<IBrands, BrandRepository>();
             services.AddTransient<IGoodsCategory, CategoryRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(ShopCart.GetCart);
+            
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +54,13 @@ namespace HabaClimate
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseSession();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("categoryfilter", "AirConditioners/{action}/{category?}",
+                    new { controller = "Conditioner", action = "List"});
+            });
             
             AppDbContext context;
             using (var scope = app.ApplicationServices.CreateScope())

@@ -14,7 +14,7 @@ namespace HabaClimate.Data.Repository
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Category> AllCategories => _appDbContext.categories
+        public IEnumerable<Category> AllCategories => _appDbContext.Categories
             .Include(a => a.Goods);
     }
 }
