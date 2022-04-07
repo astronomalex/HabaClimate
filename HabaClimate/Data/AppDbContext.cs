@@ -5,10 +5,11 @@ namespace HabaClimate.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<AirConditioner> airConditioners { get; set; }
-        public DbSet<Brand> brands { get; set; }
-        public DbSet<Category> categories { get; set; }
-        
+        public DbSet<AirConditioner> AirConditioners { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 

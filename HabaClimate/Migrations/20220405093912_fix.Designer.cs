@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HabaClimate.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220402191610_Initial")]
-    partial class Initial
+    [Migration("20220405093912_fix")]
+    partial class fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,30 @@ namespace HabaClimate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("brands");
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("HabaClimate.Data.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("GoodId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("ShopCartId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GoodId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("HabaClimate.Data.Models.Category", b =>
@@ -126,6 +149,15 @@ namespace HabaClimate.Migrations
                         .HasColumnType("integer");
 
                     b.HasDiscriminator().HasValue("AirConditioner");
+                });
+
+            modelBuilder.Entity("HabaClimate.Data.Models.CartItem", b =>
+                {
+                    b.HasOne("HabaClimate.Data.Models.Good", "Good")
+                        .WithMany()
+                        .HasForeignKey("GoodId");
+
+                    b.Navigation("Good");
                 });
 
             modelBuilder.Entity("HabaClimate.Data.Models.Good", b =>

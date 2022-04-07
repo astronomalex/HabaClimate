@@ -1,9 +1,10 @@
-﻿@using HabaClimate.Data.Models
+﻿@model HomeViewModel
+
 <div>
-    <h3>@Model.CurrCategory</h3>
+    <h1>Избранные кондиционеры</h1>
     <div class="row mt-5 mb-2">
         @{
-            foreach (AirConditioner conditioner in Model.AllAirConditioners)
+            foreach (AirConditioner conditioner in Model.FavAC)
             {
                 @Html.Partial("AllAirConditioners", conditioner);
             }

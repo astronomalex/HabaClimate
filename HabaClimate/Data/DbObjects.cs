@@ -10,16 +10,16 @@ namespace HabaClimate.Data
     {
         public static void Initial(AppDbContext context)
         {
-            if (!context.categories.Any())
+            if (!context.Categories.Any())
             {
-                context.categories.AddRange(Categories.Select(c => c.Value));
+                context.Categories.AddRange(Categories.Select(c => c.Value));
             }
             
-            if (!context.brands.Any())
-                context.brands.AddRange(Brands.Select(b => b.Value));
+            if (!context.Brands.Any())
+                context.Brands.AddRange(Brands.Select(b => b.Value));
             
-            if (!context.airConditioners.Any())
-                context.airConditioners.AddRange(new AirConditioner
+            if (!context.AirConditioners.Any())
+                context.AirConditioners.AddRange(new AirConditioner
                     {
                         Name = "BSW-07HN1/OL/15Y",
                         LongDesc =
