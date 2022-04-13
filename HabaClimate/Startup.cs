@@ -37,6 +37,7 @@ namespace HabaClimate
                 options.UseNpgsql(_configurationRoot.GetConnectionString("developConnection")));
             services.AddTransient<IAllAirConditioners, AirConditionerRepository>();
             services.AddTransient<IBrands, BrandRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
             services.AddTransient<IGoodsCategory, CategoryRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -52,3 +52,5 @@ C:\Users\green\source\repos\HabaClimate\HabaClimate\obj\Debug\net5.0\Razor\Views
 C:\Users\green\source\repos\HabaClimate\HabaClimate\bin\Debug\net5.0\AspNetCore.Http.Extensions.dll
 C:\Users\green\source\repos\HabaClimate\HabaClimate\obj\Debug\net5.0\Razor\Views\ShopCart\Index.cshtml.g.cs
 C:\Users\green\source\repos\HabaClimate\HabaClimate\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\green\source\repos\HabaClimate\HabaClimate\obj\Debug\net5.0\Razor\Views\Order\Checkout.cshtml.g.cs
+C:\Users\green\source\repos\HabaClimate\HabaClimate\obj\Debug\net5.0\Razor\Views\Order\Complete.cshtml.g.cs
