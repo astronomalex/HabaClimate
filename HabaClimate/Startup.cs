@@ -1,19 +1,19 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HabaClimate.Data;
 using HabaClimate.Data.Interfaces;
 using HabaClimate.Data.mocks;
 using HabaClimate.Data.Models;
 using HabaClimate.Data.Repository;
+using HabaClimate.Extensions;
+using HabaClimate.Helpers;
+using HabaClimate.Interfaces;
+using HabaClimate.Services.Implementations;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace HabaClimate
 {
@@ -27,21 +27,18 @@ namespace HabaClimate
         public Startup(IHostEnvironment hostEnvironment)
         {
             _configurationRoot = new ConfigurationBuilder().SetBasePath(hostEnvironment.ContentRootPath)
-                .AddJsonFile("dbSettings.json").Build();
+                .AddJsonFile("appsettings.Development.json").Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews(mvcOptions => { mvcOptions.EnableEndpointRouting = false; });
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(_configurationRoot.GetConnectionString("developConnection")));
-            services.AddTransient<IAllAirConditioners, AirConditionerRepository>();
-            services.AddTransient<IBrands, BrandRepository>();
-            services.AddTransient<IAllOrders, OrdersRepository>();
-            services.AddTransient<IGoodsCategory, CategoryRepository>();
+            
+            services.AddIdentityServices(_configurationRoot);
+            services.AddApplicationServices(_configurationRoot);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(ShopCart.GetCart);
+
             
             services.AddMvc();
 
@@ -56,6 +53,9 @@ namespace HabaClimate
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
@@ -63,27 +63,13 @@ namespace HabaClimate
                     new { controller = "Conditioner", action = "List"});
             });
             
+            
             AppDbContext context;
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 DbObjects.Initial(context);
             }
-
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
-            //
-            // app.UseRouting();
-
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapGet("/", async context =>
-            //     {
-            //         await context.Response.WriteAsync("Hello World!");
-            //     });
-            // });
         }
     }
 }

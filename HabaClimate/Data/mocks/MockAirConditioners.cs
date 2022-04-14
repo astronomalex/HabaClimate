@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HabaClimate.Data.Interfaces;
 using HabaClimate.Data.Models;
+using HabaClimate.DTOs;
 
 namespace HabaClimate.Data.mocks
 {
@@ -70,6 +72,16 @@ namespace HabaClimate.Data.mocks
                     }
                 };
             }
+        }
+
+        public async Task<IEnumerable<GoodDto>> AllGoodsAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<GoodDto> GetGoodAsync(int id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public IEnumerable<AirConditioner> GetFavAirConditioners { get; set; }
