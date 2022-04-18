@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
 
   login(): void {
     this.accountService.login(this.model).subscribe(responce => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/admin-panel');
     });
   }
 

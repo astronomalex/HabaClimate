@@ -1,13 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" routerLink='/' routerLinkActive='active'>AC климат</a>
+    <a class="navbar-brand" routerLink='/home' routerLinkActive='active'>AC климат</a>
     <ul class="navbar-nav mr-auto">
-
       <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive='active'>Главная</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive='active'>О нас</a>
+        <a class="nav-link" routerLink="/contacts" routerLinkActive='active'>О нас</a>
       </li>
       <ng-container *ngIf="accountService.currentUser$ | async">
         <li class="nav-item">
@@ -16,11 +12,7 @@
         </li>
       </ng-container>
       <li class="nav-item">
-        <a class="nav-link" href="/">Кондиционеры</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="/ShopCart">Корзина</a>
+        <a class="nav-link" routerLink="/conditioner" routerLinkActive='active'>Кондиционеры</a>
       </li>
     </ul>
 
