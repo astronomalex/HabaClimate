@@ -3,11 +3,12 @@
     @foreach (var el in @Model.ShopCart.CartItems)
     {
         <div class="alert alert-warning mt-3">
-            <b>@el.Good.Category.CategoryName: </b> @el.Good.Name<br/>
+            @* <b>@el.Good.Category.CategoryName.ToString(): </b>  *@
+            @el.Good.Name<br/>
             <b>Цена: </b>@el.Good.Price.ToString("c")
         </div>
 
     }
     <hr/>
-    <div class="btn btn-danger" asp-controller="Order">Оплатить</div>
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Оплатить</a>
 </div>

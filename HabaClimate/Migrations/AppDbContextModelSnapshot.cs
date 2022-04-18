@@ -19,6 +19,27 @@ namespace HabaClimate.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("HabaClimate.Data.Models.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<byte[]>("PassWordSalt")
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("HabaClimate.Data.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -133,6 +154,59 @@ namespace HabaClimate.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Good");
                 });
 
+            modelBuilder.Entity("HabaClimate.Data.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
+
+                    b.Property<DateTime>("OrderTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("HabaClimate.Data.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("GoodId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GoodId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("HabaClimate.Data.Models.AirConditioner", b =>
                 {
                     b.HasBaseType("HabaClimate.Data.Models.Good");
@@ -175,6 +249,25 @@ namespace HabaClimate.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("HabaClimate.Data.Models.OrderDetail", b =>
+                {
+                    b.HasOne("HabaClimate.Data.Models.Good", "Good")
+                        .WithMany()
+                        .HasForeignKey("GoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HabaClimate.Data.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Good");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("HabaClimate.Data.Models.Brand", b =>
                 {
                     b.Navigation("Goods");
@@ -183,6 +276,11 @@ namespace HabaClimate.Migrations
             modelBuilder.Entity("HabaClimate.Data.Models.Category", b =>
                 {
                     b.Navigation("Goods");
+                });
+
+            modelBuilder.Entity("HabaClimate.Data.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
