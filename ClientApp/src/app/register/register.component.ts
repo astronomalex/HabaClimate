@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AccountService} from '../_services/account.service';
+import {ToastrModule, ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,9 @@ export class RegisterComponent implements OnInit {
   validationErrors: string[] = [];
 
   constructor(private accountService: AccountService,
-              private fb: FormBuilder, private router: Router) {
+              private fb: FormBuilder,
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('/members');
     }, error => {
       this.validationErrors = error;
+      this.toastr.error(error.error);
     });
   }
 

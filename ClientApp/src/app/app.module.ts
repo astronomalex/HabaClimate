@@ -15,6 +15,7 @@ import { ConditionerListComponent } from './conditioners/conditioner-list/condit
 import { ConditionerDetailComponent } from './conditioners/conditioner-detail/conditioner-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { ContactsComponent } from './help/contacts/contacts.component';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import { ContactsComponent } from './help/contacts/contacts.component';
     FormsModule,
     BsDropdownModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
