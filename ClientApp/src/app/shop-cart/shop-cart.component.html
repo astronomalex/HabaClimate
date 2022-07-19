@@ -1,0 +1,55 @@
+<ng-container *ngIf="items.length !=0">
+  <div class="container">
+    <div class="card-table">
+      <div class="cart-product">
+        <table class="table table-responsive">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Название</th>
+            <th>Фото</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of items; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.good.name}}</td>
+            <td><img style="width: 120px;" src="{{hostUrl + item.good.img}}" alt=""></td>
+            <td style="width: 25%;">{{item.good.shortDesc}}</td>
+            <th style="width: 12%;">{{item.price}}</th>
+            <td style="width: 12%;">{{item.quantity}}</td>
+            <td>
+              <button (click)="removeItem(item)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td><button (click)="emptycart()" class="btn btn-danger">Очистить</button></td>
+            <td><button routerLink="/conditioners" class="btn btn-primary">Добавить ещё</button></td>
+            <td><button (click)="openDialog()" class="btn btn-success">Оформить заказ</button></td>
+            <td><strong>Итог : {{grandTotal}}</strong></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="items.length ==0">
+  <div class="container">
+    <div class="card">
+      <h5 class="card-title">Корзина</h5>
+    </div>
+    <div class="center">
+      <h4>Корзина пуста</h4>
+      <h6>Add item to it now</h6>
+      <button routerLink="/conditioners" class="btn btn-primary">Shop Now</button>
+    </div>
+  </div>
+</ng-container>

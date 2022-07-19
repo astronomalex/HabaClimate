@@ -7,12 +7,15 @@ import {ConditionerListComponent} from './conditioners/conditioner-list/conditio
 import {ListsComponent} from './lists/lists.component';
 import {ContactsComponent} from './help/contacts/contacts.component';
 import {AuthGuard} from './_guards/auth.guard';
+import {ConditionersPageComponent} from "./conditioners/conditioners-page/conditioners-page.component";
+import {ShopCartComponent} from "./shop-cart/shop-cart.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin-panel', component: AdminPanelComponent, canActivate: [AuthGuard]},
-  {path: 'conditioners', component: ConditionerListComponent},
+  {path: 'conditioners', component: ConditionersPageComponent},
+  {path: 'shopcart', component: ShopCartComponent},
   {path: 'lists', component: ListsComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: '**', component: HomeComponent, pathMatch: 'full'}

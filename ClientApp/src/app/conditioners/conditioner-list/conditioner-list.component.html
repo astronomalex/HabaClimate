@@ -1,0 +1,8 @@
+<div class="row">
+  <div
+    *ngFor="let good of goods" class="col-4">
+    <app-conditioner-card
+      [good]="good"
+      (addToCartEvent)="addGoodToCart($event)"></app-conditioner-card>
+  </div>
+</div>

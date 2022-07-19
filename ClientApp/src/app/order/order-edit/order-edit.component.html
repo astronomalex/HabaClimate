@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" [formGroup]="orderFormControl">
+    <mat-card-content class="container-fluid">
+      <p>
+        <mat-form-field>
+          <mat-label>Имя</mat-label>
+          <input formControlName="name" matInput type="text">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Фамилия</mat-label>
+          <input formControlName="surname" matInput type="text">
+        </mat-form-field>
+      </p>
+      <label>Телефон</label>
+      <input type="text" formControlName="phone" class="form-control mb-3">
+
+      <div *ngIf="p['phone'].touched && p['phone'].invalid" class="alert alert-danger">
+        <div *ngIf="p['phone'].errors?.required">Пожалуйста укажите номер телефона для связи с нами</div>
+        <div *ngIf="p['phone'].errors?.pattern">Введите 10 цифр номера телефона</div>
+      </div>
+      <mat-card-actions>
+        <button
+          [disabled]="!orderFormControl.valid"
+          mat-button
+          mat-dialog-close cdkFocusInitial
+          type="submit">Отправить заявку
+        </button>
+
+        <button mat-button mat-dialog-close>Отмена</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </form>
+
+</div>

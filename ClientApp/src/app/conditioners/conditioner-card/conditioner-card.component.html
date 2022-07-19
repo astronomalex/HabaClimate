@@ -1,0 +1,17 @@
+<div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img [src]="img"
+         style="cursor: pointer"
+         class="card-img-top"/>
+  </div>
+</div>
+<div class="card-body p-1">
+  <h6 class="card-title text-center mb-1"><i class="fa fa-shopping-bag mr-2"></i>
+    модель: {{good.name}} цена: {{good.price}}
+  </h6>
+  <p class="card-text text-center">{{good.brandName}}</p>
+  <button (click)="addToCart()"
+          class="btn btn-success">
+    Добавить в корзину
+  </button>
+</div>
